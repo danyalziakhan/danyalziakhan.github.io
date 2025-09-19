@@ -37,7 +37,7 @@ I write every line of code myself and tailor each project to the client’s exac
 
 ## Hire Me
 
-I offer these services on [Fiverr](https://www.fiverr.com/virtuous_person) with clear pricing, fast delivery, and one free revision.  
+I offer these services on [Fiverr](https://www.fiverr.com/danyalzia) with clear pricing, fast delivery, and one free revision.  
 If a project needs something extra such as custom deployment, special hosting, or a long term maintenance plan, I can take care of that as well. 🙂
 
 ## Contact
