@@ -1,3 +1,8 @@
+---
+layout: default
+title: Home
+---
+
 # Hi, I'm Danyal 🙂
 
 I’m a software engineer who builds **custom Python automation, web scrapers, and full-stack solutions** that save time and cut manual effort.
