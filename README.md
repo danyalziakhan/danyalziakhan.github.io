@@ -1,8 +1,8 @@
 # Hi, I'm Danyal 🙂
 
-I’m a software engineer who builds **custom Python automation, web scrapers, and full-stack solutions** that save time and cut manual effort.
+I’m a software engineer who builds **Python automation, RPA solutions, intelligent bots, web scrapers, and full-stack systems** that save time and cut manual effort. I also create **tutorials and technical writing** that simplify complex topics for others.
 
-I write every line of code myself and tailor each project to the client’s exact needs.
+I personally craft the code for each project and tailor it to the client’s exact needs. Alongside development, I create tutorials and technical writing to explain complex concepts clearly and practically.
 
 ## What I Do
 
@@ -10,35 +10,35 @@ I write every line of code myself and tailor each project to the client’s exac
   I build Python-based scrapers for anything from simple static pages to highly dynamic sites, handling authentication, anti-bot measures, and proxy rotation. My Playwright framework supports parallel scraping, login automation, network interception, and infinite scroll for large-scale data collection.
 
 - **Python Script Debugging**  
-  I quickly find and fix bugs or logic issues in any Python code. Every fix is manual and clearly commented so you can understand exactly what was changed.
+  I quickly find and fix bugs or logic issues in any Python code, ensuring each change is clearly explained through comments.
 
 - **Custom Process Automation**  
-  I create Python programs that automate repetitive work—data entry, bulk file operations, scheduled tasks, and complex web or desktop workflows—saving time and reducing manual effort.
+  I create Python programs that automate repetitive work such as data entry, bulk file operations, scheduled tasks, and complex web or desktop workflows, saving time and reducing manual effort.
 
 - **Programming Tutorials & Documentation**  
-  I write clear, step-by-step tutorials and API documentation for blogs, courses, or developer portals. Content is original, well-structured, and tailored to your audience, covering Python, JavaScript, FastAPI, React, and more.
+  I write clear, step-by-step tutorials for blogs and course overviews, as well as API documentation for developer portals and official resources. Content is original, well-structured, and tailored to your audience, covering Python, JavaScript, FastAPI, React, and more.
 
 ## Recent Projects
 
-- **Notification Listener Android App**  
-  Developed an Android service that captures phone notifications and forwards them as SMS in real time. Implemented battery-level alerts, app-ignore lists, and a foreground service for stable performance on Android 14.
+- **Notification Listener Android App**
+  Developed an Android service that captures phone notifications and forwards them as SMS in real time. Implemented battery-level alerts, app-ignore lists, and a foreground service for stable performance.
 
-- **Laravel to Django Migration**  
-  Ported a large production system from Laravel to Django, rebuilding REST APIs and preserving all data and business logic while improving maintainability and deployment speed.
+- **Laravel upgrade (v6 → v12)**
+  Upgraded a production Laravel application from version 6 to 12, modernizing all dependencies and modules. Migrated the frontend build system from Laravel Mix to Vite and ported the Vue 2 codebase to Vue 3 for improved performance and maintainability.
 
-- **Advanced Web Scraping Portfolio**  
-  Delivered 200+ custom Python scrapers for clients worldwide, from Korean domestic markets to international e-commerce sites. Combined Playwright, Selenium, and BeautifulSoup to bypass authentication barriers, anti-bot systems, and IP bans.
+- **Advanced Web Scraping Portfolio**
+  Delivered 200+ custom Python scrapers for clients worldwide, from Korean domestic markets to international e-commerce sites. Developed a custom Playwright-based framework leveraging BeautifulSoup, pandas, and aiohttp to overcome authentication barriers, anti-bot systems, and IP restrictions.
 
-- **Custom Python Automation Tools**  
-  Built RPA solutions for data entry, bulk file management, scheduled reporting, and desktop/web task automation, reducing manual workload for multiple businesses.
+- **Custom Python Automation Tools**
+  Built RPA solutions for data entry, bulk file management, image resizing and downloading, data cleaning and processing, thumbnail generation, vinyl (LP) creation, and other desktop/web task automation, reducing manual workload for multiple businesses.
 
 - **Technical Writing & Tutorials**  
-  Authored programming tutorials, API documentation, and course materials on Python, FastAPI, React, and other modern stacks for blogs and developer education.
+  Wrote tutorials on programming fundamentals (C#, C++) and articles on frameworks such as Angular, React, and Ionic, along with API documentation and course materials.
 
 ## Hire Me
 
-I offer these services on [Fiverr](https://www.fiverr.com/danyalzia) with clear pricing, fast delivery, and one free revision.  
-If a project needs something extra such as custom deployment, special hosting, or a long term maintenance plan, I can take care of that as well. 🙂
+I offer these services on [Fiverr](https://www.fiverr.com/danyalzia) with clear pricing and fast delivery.  
+If a project needs something extra such as custom deployment, hosting configuration, or a long-term maintenance plan, I can take care of that as well. 🙂
 
 ## Contact
 
