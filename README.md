@@ -23,8 +23,20 @@ I personally craft the code for each project and tailor it to the client’s exa
 - **Notification Listener Android App**
   Developed an Android service that captures phone notifications and forwards them as SMS in real time. Implemented battery-level alerts, app-ignore lists, and a foreground service for stable performance.
 
+- **Depth Mesh Combiner**
+  I built this as part of a 3D Sand Model project (inspired by the Augmented Reality Sandbox) to merge four different data streams into a single, clean image. The app has simple sliders to line up the depth sensors by tweaking margins and heights, so the contours look natural. Once everything’s aligned, those settings can be saved as a transformation matrix, which makes the real-time adjustments much faster while the program runs.
+
+- **ThrowViz (Throw Distance Visualization)**
+  While working on the 3D Sand Model, I built a little Python tool to figure out how much area a laser projector would cover at different distances. You just give it the surface size, the distance from the projector to the surface, and the projector’s throw ratio, and it shows you the projected coverage. It’s handy for quickly testing the best mounting height or distance. For example, if you need a bigger projection area, it tells you how much farther back the projector should be.
+
 - **Laravel upgrade (v6 → v12)**
   Upgraded a production Laravel application from version 6 to 12, modernizing all dependencies and modules. Migrated the frontend build system from Laravel Mix to Vite and ported the Vue 2 codebase to Vue 3 for improved performance and maintainability.
+
+- **Pakistan Businessmen Association (PBA)**  
+  Developed a hybrid CRM/ERP web application that streamlined the company’s internal operations, enabling workflows to be managed by a small admin team (1–2 people). Key features included membership registration and management, financial transactions, document issuance and printing, blacklist and expense tracking, database backups, user management, and SMS/email notifications. Built with Laravel 12 (backend), Vue 2 (frontend), and MariaDB. In addition, I overhauled the association’s existing website (originally built by other developers), modernizing it with the latest Bootstrap, fixing responsiveness issues, enhancing verification pages with new features, and resolving multiple bugs. Also built with Laravel 12, Vue 2, and MariaDB.
+
+- **Distributed Application Manager**
+  I built a full stack platform with FastAPI, WebSockets, and React to bring all of my Python automation tools under one roof. Instead of running scripts separately, this app lets you configure, run, and monitor them from a single web interface. It handles everything from crawlers and registration automation to image processors and Excel utilities. You can stream logs in real time, schedule tasks, and run multiple workflows in parallel. The idea was to turn a messy collection of scripts into a clean, scalable automation hub for internal use.
 
 - **Advanced Web Scraping Portfolio**
   Delivered 200+ custom Python scrapers for clients worldwide, from Korean domestic markets to international e-commerce sites. Developed a custom Playwright-based framework leveraging BeautifulSoup, pandas, and aiohttp to overcome authentication barriers, anti-bot systems, and IP restrictions.
