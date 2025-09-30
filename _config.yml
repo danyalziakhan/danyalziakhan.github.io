@@ -1,0 +1,14 @@
+theme: jekyll-theme-minimal
+title: Danyal Zia Khan
+description: Software engineer specializing in Python automation, web scraping, API development, and full-stack web applications. I deliver clean, efficient solutions for complex tasks and custom workflows.
+
+navigation:
+  - title: Home
+    url: /
+  - title: Blog
+    url: /blog
+
+collections:
+  archive:
+    output: true
+    permalink: /blog/archive/:name/

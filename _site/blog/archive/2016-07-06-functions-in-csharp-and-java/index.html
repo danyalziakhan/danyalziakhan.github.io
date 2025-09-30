@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Functions (a.k.a Subroutines) - Static Methods and Static Classes in C# and Java | Danyal Zia Khan</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Functions (a.k.a Subroutines) - Static Methods and Static Classes in C# and Java" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Functions (a.k.a Subroutines) - Static Methods and Static Classes in C# and Java" />
+<meta property="og:description" content="Functions (a.k.a Subroutines) - Static Methods and Static Classes in C# and Java" />
+<link rel="canonical" href="http://localhost:4000/blog/archive/2016-07-06-functions-in-csharp-and-java/" />
+<meta property="og:url" content="http://localhost:4000/blog/archive/2016-07-06-functions-in-csharp-and-java/" />
+<meta property="og:site_name" content="Danyal Zia Khan" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-07-06T00:00:00+05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Functions (a.k.a Subroutines) - Static Methods and Static Classes in C# and Java" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2016-07-06T00:00:00+05:00","datePublished":"2016-07-06T00:00:00+05:00","description":"Functions (a.k.a Subroutines) - Static Methods and Static Classes in C# and Java","headline":"Functions (a.k.a Subroutines) - Static Methods and Static Classes in C# and Java","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/archive/2016-07-06-functions-in-csharp-and-java/"},"url":"http://localhost:4000/blog/archive/2016-07-06-functions-in-csharp-and-java/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=0ca3d8b29b7e40d06878a0ef37a4c54d76a64489">
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1><a href="http://localhost:4000/">Danyal Zia Khan</a></h1>
+
+        
+
+        <p>Software engineer specializing in Python automation, web scraping, API development, and full-stack web applications. I deliver clean, efficient solutions for complex tasks and custom workflows.</p>
+        
+        <nav style="margin-bottom: 20px">
+        
+        <a href="/" style="margin-right: 10px">
+            Home
+        </a>
+        
+        <a href="/blog" style="margin-right: 10px">
+            Blog
+        </a>
+        
+        </nav>
+
+      </header>
+      <section>
+
+      <h1 id="functions-aka-subroutines---static-methods-and-static-classes-in-c-and-java">Functions (a.k.a Subroutines) - Static Methods and Static Classes in C# and Java</h1>
+
+<p><strong>Note:</strong> This tutorial is part of a beginner series on Object Oriented Programming (OOP). It assumes that readers understand data types, variables, conditions, loops, and know how to properly write and run a “hello world” program.</p>
+
+<p><strong>Difficulty:</strong> Beginner</p>
+
+<p>A function is a way of packaging up code that does something, such as adding two numbers and then returning the value, or writing your funny name to the console. Through functions, you can separate commonly used tasks into different parts which can be called wherever a programmer needs them, instead of forcing you to duplicate the same code throughout the program (which you won’t like, trust me).</p>
+
+<p>In OOP languages such as C# or Java, functions are implemented as static methods; that is, they are declared within a class, unlike C/C++ and some other languages where the functions exist by themselves. In OOP, they are part of an object and are defined in a class (or in a struct) and every executed instruction is performed in the context of a method. So, for example, when we called <code class="language-plaintext highlighter-rouge">Console.WriteLine()</code> in C#, we were actually calling a function (available to the assembly of C#) that simply writes something to the console.</p>
+
+<p>In this tutorial, I will teach you how you can implement functions in C# and Java to make your programming life more joyful!</p>
+
+<hr />
+
+<h2 id="static-methods">Static Methods</h2>
+
+<p>As I said earlier, in OOP languages, we define functions as static methods. They are those methods which do not change the state of a class (thus they are called “static”). It makes sense that functions are implemented as static methods, because in functions we are interested in executing some arbitrary logic and we are not interested in changing the object’s state.</p>
+
+<p>The syntax for defining a static method in a class is the same for both C# and Java. It is as follows:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="n">access</span> <span class="n">modifier</span><span class="p">&gt;</span> <span class="k">static</span> <span class="p">&lt;</span><span class="n">data</span> <span class="n">type</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="n">function</span> <span class="n">name</span><span class="p">&gt;(&lt;</span><span class="n">parameters</span><span class="p">,</span> <span class="k">if</span> <span class="n">any</span><span class="p">&gt;)</span>
+<span class="p">{</span>
+    <span class="c1">// Implementation of a function</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Considering this syntax, we can easily define our function. Let’s define a function for adding two numbers:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="kt">int</span> <span class="k">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="p">+</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>You can see that it’s simple to define a function, but then the task that our function does is simple as well. Let’s define another function for calculating factorial:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="kt">int</span> <span class="nf">factorial</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="p">&lt;</span> <span class="m">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="m">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">n</span> <span class="p">*</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span> <span class="p">-</span> <span class="m">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We can use our functions in a program as follows:</p>
+
+<p><strong>C#</strong></p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">StaticMethod</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="kt">int</span> <span class="k">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="p">+</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="kt">int</span> <span class="nf">factorial</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="p">&lt;</span> <span class="m">2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="m">1</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">n</span> <span class="p">*</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span> <span class="p">-</span> <span class="m">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="k">add</span><span class="p">(</span><span class="m">4</span><span class="p">,</span> <span class="m">4</span><span class="p">));</span> <span class="c1">// prints ‘8’</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="nf">factorial</span><span class="p">(</span><span class="m">4</span><span class="p">));</span> <span class="c1">// prints ‘24’</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Java</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">StaticMethod</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">factorial</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">add</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="mi">4</span><span class="o">));</span> <span class="c1">// prints ‘8’</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">factorial</span><span class="o">(</span><span class="mi">4</span><span class="o">));</span> <span class="c1">// prints ‘24’</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="static-classes">Static Classes</h2>
+
+<p>Static classes are those classes for which only one instance is available to a program. These classes do not need to be instantiated. It is a useful feature in cases where you know that an instance of a class does not need to be passed to other classes, but can be easily used without instantiating. A static class is a class which can only contain static members, and therefore cannot be instantiated. One of its examples is <code class="language-plaintext highlighter-rouge">GameSettings</code> for storing different settings in a game.</p>
+
+<p>We can define such a class as follows:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">GameSettings</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="kt">bool</span> <span class="n">soundOn</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="kt">bool</span> <span class="n">musicOn</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">run</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Running..."</span><span class="p">);</span> <span class="c1">// Or System.out.println("Running..."); in Java</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The following is the syntax for using a static method in a class:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="k">class</span> <span class="nc">name</span><span class="p">&gt;.&lt;</span><span class="k">static</span> <span class="n">method</span> <span class="n">name</span><span class="p">&gt;;</span>
+</code></pre></div></div>
+
+<p>Now we can use our static class in a program as follows:</p>
+
+<p><strong>C#</strong></p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">StaticClass</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="kt">bool</span> <span class="nf">isMusicOn</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">GameSettings</span><span class="p">.</span><span class="n">musicOn</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">GameSettings</span><span class="p">.</span><span class="n">soundOn</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+        <span class="n">GameSettings</span><span class="p">.</span><span class="n">musicOn</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+        <span class="n">GameSettings</span><span class="p">.</span><span class="nf">run</span><span class="p">();</span>
+
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="nf">isMusicOn</span><span class="p">());</span> <span class="c1">// prints 'false’</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Java</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">StaticClass</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isMusicOn</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">GameSettings</span><span class="o">.</span><span class="na">musicOn</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">GameSettings</span><span class="o">.</span><span class="na">soundOn</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="nc">GameSettings</span><span class="o">.</span><span class="na">musicOn</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="nc">GameSettings</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">isMusicOn</span><span class="o">());</span> <span class="c1">// prints 'false’</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Note that you cannot use non static members in static methods.</p>
+
+<p>As you can see, a static class can be used as a convenient container for sets of methods that only run on input parameters and do not modify the state of an object. In the .NET Framework Class Library, the static <a href="http://msdn.microsoft.com/en-us/library/system.math.aspx">Math</a> class contains methods that perform mathematical operations like <code class="language-plaintext highlighter-rouge">cos</code>, <code class="language-plaintext highlighter-rouge">sin</code>, etc., without any requirement to store or retrieve data that is unique to a particular instance of the class. Thus, they do not need instantiation.</p>
+
+<p>Functions are best suited for simple tasks, especially when some task is duplicated several times in your program. Hence, you can simply create a static method in a class and call it whenever you need it. In which cases are you going to use functions?</p>
+
+
+      </section>
+      <footer>
+        <p><small>Copyright (c) 2025 Danyal Zia Khan</small></p>
+      </footer>
+    </div>
+    <script src="/assets/js/scale.fix.js"></script>
+  </body>
+</html>

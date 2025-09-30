@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Arrays in C# - Static and Dynamic Arrays, Syntax and Usefulness | Danyal Zia Khan</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Arrays in C# - Static and Dynamic Arrays, Syntax and Usefulness" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Arrays in C# - Static and Dynamic Arrays, Syntax and Usefulness" />
+<meta property="og:description" content="Arrays in C# - Static and Dynamic Arrays, Syntax and Usefulness" />
+<link rel="canonical" href="http://localhost:4000/blog/archive/2016-07-10-arrays-in-csharp/" />
+<meta property="og:url" content="http://localhost:4000/blog/archive/2016-07-10-arrays-in-csharp/" />
+<meta property="og:site_name" content="Danyal Zia Khan" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-07-10T00:00:00+05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Arrays in C# - Static and Dynamic Arrays, Syntax and Usefulness" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2016-07-10T00:00:00+05:00","datePublished":"2016-07-10T00:00:00+05:00","description":"Arrays in C# - Static and Dynamic Arrays, Syntax and Usefulness","headline":"Arrays in C# - Static and Dynamic Arrays, Syntax and Usefulness","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/archive/2016-07-10-arrays-in-csharp/"},"url":"http://localhost:4000/blog/archive/2016-07-10-arrays-in-csharp/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=0ca3d8b29b7e40d06878a0ef37a4c54d76a64489">
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1><a href="http://localhost:4000/">Danyal Zia Khan</a></h1>
+
+        
+
+        <p>Software engineer specializing in Python automation, web scraping, API development, and full-stack web applications. I deliver clean, efficient solutions for complex tasks and custom workflows.</p>
+        
+        <nav style="margin-bottom: 20px">
+        
+        <a href="/" style="margin-right: 10px">
+            Home
+        </a>
+        
+        <a href="/blog" style="margin-right: 10px">
+            Blog
+        </a>
+        
+        </nav>
+
+      </header>
+      <section>
+
+      <h1 id="arrays-in-c---static-and-dynamic-arrays-syntax-and-usefulness">Arrays in C# - Static and Dynamic Arrays, Syntax and Usefulness</h1>
+
+<p><strong>Note:</strong> This tutorial is part of a beginner series on Object Oriented Programming (OOP). It assumes that readers understand data types, variables, conditions, loops, and know how to properly write and run a “hello world” program.</p>
+
+<p><strong>Difficulty:</strong> Beginner</p>
+
+<p>An array is one of those features that are commonly found in most programming languages. It is a way to store multiple values of the same data type in a single variable. With it, you do not need to redundantly create variables of the same data type.</p>
+
+<p>Arrays in C# are zero indexed like in most languages such as C and C++. That is, the array indexes start at zero. In C#, arrays are objects just like everything else and must be instantiated after declaring them in order to use them in your program.</p>
+
+<p>In this tutorial, I will teach you the syntax and usage of arrays in C#. Let’s get started!</p>
+
+<hr />
+
+<h2 id="declaring-and-instantiating-arrays">Declaring and Instantiating Arrays</h2>
+
+<p>The following is the syntax for declaring arrays:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="n">data</span> <span class="n">type</span><span class="p">&gt;[]</span> <span class="p">&lt;</span><span class="n">variable</span> <span class="n">name</span><span class="p">&gt;;</span>
+</code></pre></div></div>
+
+<p>For example, if we want to create two arrays, one for storing integers and one for storing strings, we can do so as follows:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="p">[]</span> <span class="n">numbers</span><span class="p">;</span>
+<span class="kt">string</span><span class="p">[]</span> <span class="n">students</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Note that they have not been created yet. You can create them as follows:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="p">[]</span> <span class="n">numbers</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="m">10</span><span class="p">];</span> <span class="c1">// creates an array of 10 integers</span>
+<span class="kt">string</span><span class="p">[]</span> <span class="n">students</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[</span><span class="m">10</span><span class="p">];</span> <span class="c1">// creates an array of 10 strings</span>
+</code></pre></div></div>
+
+<p>You can see that the syntax for instantiating arrays is the same as the syntax for instantiating an object. Thus it is obvious that they are created and are objects just like other things in C#.</p>
+
+<p>Now, for defining elements in an array, you can use the following syntax:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">numbers</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="m">20</span><span class="p">;</span>
+<span class="n">numbers</span><span class="p">[</span><span class="m">5</span><span class="p">]</span> <span class="p">=</span> <span class="m">10</span><span class="p">;</span>
+
+<span class="n">students</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="s">"Richard"</span><span class="p">;</span>
+<span class="n">students</span><span class="p">[</span><span class="m">6</span><span class="p">]</span> <span class="p">=</span> <span class="s">"Jack"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>As you can see, the first element in an array starts with index 0. That is, if an array is of size 10 (<code class="language-plaintext highlighter-rouge">new int[10]</code>), then you can write and read elements from 0 to 9. Using an index greater than the size of an array will throw an overflow error, so keep this in mind when you use arrays in your program.</p>
+
+<p>Note that in C#, there is no distinction between static and dynamic arrays. The syntax for declaring them is the same. For increasing the size of an array, you can simply instantiate it again as follows:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">numbers</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="m">20</span><span class="p">];</span>
+</code></pre></div></div>
+
+<p>For retrieving the length of an array, you can use the property <code class="language-plaintext highlighter-rouge">Length</code> that is available on every array.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">numbers</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span> <span class="c1">// will print 20</span>
+</code></pre></div></div>
+
+<p>For declaring and creating an array at the same time, you can use the following syntax:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="p">[]</span> <span class="n">numbers</span> <span class="p">=</span> <span class="p">{</span><span class="m">5</span><span class="p">,</span> <span class="m">50</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="m">3</span><span class="p">};</span>
+</code></pre></div></div>
+
+<p>That will create an array of size equal to the number of elements present in the list.</p>
+
+<p>Another interesting thing to note is that <code class="language-plaintext highlighter-rouge">foreach</code> loops can easily be used on arrays. For example:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">foreach</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="k">in</span> <span class="n">numbers</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="single-dimensional-arrays-multidimensional-arrays-and-array-of-arrays-jagged-arrays">Single Dimensional Arrays, Multidimensional Arrays, and Array of Arrays (Jagged Arrays)</h2>
+
+<p>As we have seen previously, we can declare single dimensional arrays as follows:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="p">[]</span> <span class="n">numbers</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>In C#, there are two more types of arrays: multidimensional arrays and array of arrays.</p>
+
+<p>For declaring and creating multidimensional arrays we can use the following syntax:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="p">[,]</span> <span class="n">matrix</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="m">5</span><span class="p">,</span> <span class="m">4</span><span class="p">];</span>
+
+<span class="n">matrix</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[,]</span> <span class="p">{</span> <span class="p">{</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">},</span> <span class="p">{</span><span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">},</span> <span class="p">{</span><span class="m">5</span><span class="p">,</span> <span class="m">6</span><span class="p">},</span> <span class="p">{</span><span class="m">7</span><span class="p">,</span> <span class="m">8</span><span class="p">},</span> <span class="p">{</span><span class="m">9</span><span class="p">,</span> <span class="m">10</span><span class="p">}</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<p>You can access the members of this array as follows:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">matrix</span><span class="p">[</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">]</span> <span class="p">=</span> <span class="m">5</span><span class="p">;</span> <span class="c1">// changes the second element in the second row to 5</span>
+</code></pre></div></div>
+
+<p>For declaring and creating an array of arrays we can use the following syntax:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">byte</span><span class="p">[][]</span> <span class="n">scores</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="p">[</span><span class="m">5</span><span class="p">][];</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">x</span> <span class="p">&lt;</span> <span class="n">scores</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="n">x</span><span class="p">++)</span>
+<span class="p">{</span>
+    <span class="n">scores</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="p">[</span><span class="m">4</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now, you can access the members of this array as follows:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scores</span><span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="m">58</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="usefulness">Usefulness</h2>
+
+<p>Arrays are commonly used in cases where you need to store the same types of data, but the number of items is large. Instead of defining multiple variables, you can store them in an array and retrieve them later from a single variable.</p>
+
+<p>For instance, if you need to store the names of students, without arrays you would need to define variables for every student’s name. With arrays, you can simply store all the student names in an array of strings. This makes the program easier to read and manage.</p>
+
+<p>However, when we need a collection of different data types, then we use a class or struct instead.</p>
+
+<p>From trivial to complex programs, you can see the usage of arrays pretty much everywhere. Their usefulness cannot be dismissed, considering the fact that they are implemented in most programming languages we use.</p>
+
+
+      </section>
+      <footer>
+        <p><small>Copyright (c) 2025 Danyal Zia Khan</small></p>
+      </footer>
+    </div>
+    <script src="/assets/js/scale.fix.js"></script>
+  </body>
+</html>

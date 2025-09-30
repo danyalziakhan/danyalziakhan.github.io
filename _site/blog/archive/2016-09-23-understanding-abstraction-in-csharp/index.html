@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Understanding Abstraction in C# | Danyal Zia Khan</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Understanding Abstraction in C#" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Understanding Abstraction in C#" />
+<meta property="og:description" content="Understanding Abstraction in C#" />
+<link rel="canonical" href="http://localhost:4000/blog/archive/2016-09-23-understanding-abstraction-in-csharp/" />
+<meta property="og:url" content="http://localhost:4000/blog/archive/2016-09-23-understanding-abstraction-in-csharp/" />
+<meta property="og:site_name" content="Danyal Zia Khan" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-09-23T00:00:00+05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Understanding Abstraction in C#" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2016-09-23T00:00:00+05:00","datePublished":"2016-09-23T00:00:00+05:00","description":"Understanding Abstraction in C#","headline":"Understanding Abstraction in C#","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/archive/2016-09-23-understanding-abstraction-in-csharp/"},"url":"http://localhost:4000/blog/archive/2016-09-23-understanding-abstraction-in-csharp/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=0ca3d8b29b7e40d06878a0ef37a4c54d76a64489">
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1><a href="http://localhost:4000/">Danyal Zia Khan</a></h1>
+
+        
+
+        <p>Software engineer specializing in Python automation, web scraping, API development, and full-stack web applications. I deliver clean, efficient solutions for complex tasks and custom workflows.</p>
+        
+        <nav style="margin-bottom: 20px">
+        
+        <a href="/" style="margin-right: 10px">
+            Home
+        </a>
+        
+        <a href="/blog" style="margin-right: 10px">
+            Blog
+        </a>
+        
+        </nav>
+
+      </header>
+      <section>
+
+      <h1 id="understanding-abstraction-in-c">Understanding Abstraction in C#</h1>
+
+<p><strong>Note:</strong> This tutorial assumes that you have read my previous tutorials on classes, and that you at least know how to create an instance of a class.</p>
+
+<p><strong>Difficulty:</strong> Intermediate</p>
+
+<p>In my previous tutorials, I have mentioned that the methods (functions defined in a given class) marked as public are the only methods visible to the program and can be used by a programmer, while the methods that are marked as protected are accessible within their class and by derived class instances. In Object Oriented Programming (OOP), abstraction is considered one of three fundamental principles (along with encapsulation and inheritance) that define the paradigm.</p>
+
+<p>Through the use of abstraction, you can hide the unwanted details of the underlying data about an object in order to reduce complexity and increase efficiency. If you have some background in art, you will realize that it works in the same way. For instance, if you are sketching an apple, it is not desirable to sketch the unwanted details around the apple. The details of the apple are the only things that really matter to you. In this way, an object that is created through a class represents the original …</p>
+
+<p>Abstraction is related to both encapsulation and data hiding. Through this design, you can separate interface from implementation. It is often considered the most useful technique in data hiding. It is not only useful in the program for which the design is originally implemented, but in other programs too. If you are creating some library that is going to be used by other programmers, then it is a very useful design for an API (Application Programming Interface) as it completely hides the implementati…</p>
+
+<p>So, the question is: how can you use this power of abstraction?</p>
+
+<p>I will explain its concept and how this design can be implemented in your C# programs. Even though the source code examples that I will provide may be valid for Java or C++ too, I am focusing on C#. So, let’s get started!</p>
+
+<hr />
+
+<h2 id="interfaces-to-the-rescue">Interfaces To The Rescue</h2>
+
+<p>Suppose you want to create some graphics library whose purpose is to simply draw a circle or a rectangle to a window. When designing the API with this design in mind, our concern is not how the methods should be implemented, but how a programmer is supposed to use it. Through an interface, you can separate the common methods of different classes. This assures that any class that inherits from the given interface must implement the methods defined in the interface, otherwise the compiler will give you err…</p>
+
+<p>Let’s consider an interface <code class="language-plaintext highlighter-rouge">Drawable</code> with a method <code class="language-plaintext highlighter-rouge">Draw</code> that needs to be implemented in the classes that inherit this interface.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">interface</span> <span class="nc">Drawable</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Draw</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now, every class that inherits from <code class="language-plaintext highlighter-rouge">Drawable</code> must implement <code class="language-plaintext highlighter-rouge">Draw</code>.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Circle</span> <span class="p">:</span> <span class="n">Drawable</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Draw</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nf">SomeFunction</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Rectangle</span> <span class="p">:</span> <span class="n">Drawable</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Draw</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nf">SomeFunction</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In this case, a programmer does not need to worry about the implementation of <code class="language-plaintext highlighter-rouge">Draw</code> in every class that implements the interface <code class="language-plaintext highlighter-rouge">Drawable</code>. They just use those methods in the way they are supposed to be used without worrying about the implementation of different <code class="language-plaintext highlighter-rouge">Draw</code> methods. Here, you also ensure that the entity is named in a manner that makes sense and that it has all the relevant aspects.</p>
+
+<p>As abstraction provides a programmer a generalized view of the classes, a user of your library can easily examine the interface without reading the implementation, thus it enhances readability. Recall that I mentioned that abstraction can increase efficiency in some cases. For example, suppose you have several methods that have similar functionality of <code class="language-plaintext highlighter-rouge">Draw</code>, but you name them differently, such as <code class="language-plaintext highlighter-rouge">Draw</code> and <code class="language-plaintext highlighter-rouge">DrawOnce</code>, for drawing in a loop or drawing once respectively. Now the programmer can easily se…</p>
+
+<p>At this point, I should add that interfaces are linked with the concept of polymorphism in the sense that it is considered the application of interfaces.</p>
+
+<hr />
+
+<h2 id="polymorphism">Polymorphism</h2>
+
+<p>Through polymorphism, a programmer can use the derived class in the place of a base class. It is a way to generically use common methods. Polymorphism can be considered the application of several concepts such as inheritance and generics. I will not go into the details of polymorphism and its every possible application. I will focus only on its application in abstraction.</p>
+
+<p>In our example, any class can be passed to a method <code class="language-plaintext highlighter-rouge">Draw</code> of an instance of <code class="language-plaintext highlighter-rouge">Window</code> that implements the interface <code class="language-plaintext highlighter-rouge">Drawable</code>, resulting in expressive code and reduced complexity.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Window</span>
+<span class="p">{</span>
+    <span class="k">void</span> <span class="nf">Draw</span> <span class="p">(</span><span class="n">Drawable</span> <span class="n">drawable</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">drawable</span><span class="p">.</span><span class="nf">Draw</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now, a programmer who wants to draw different shapes other than rectangles and circles can create their own user defined classes that inherit from <code class="language-plaintext highlighter-rouge">Drawable</code> and then simply implement the <code class="language-plaintext highlighter-rouge">Draw</code> method. In this way, the instance of a user defined class can easily be passed into the method <code class="language-plaintext highlighter-rouge">Draw</code> of an instance of <code class="language-plaintext highlighter-rouge">Window</code>. Through the process, we obtained what we wanted in the first place, data hiding, thus we can conclude that abstraction is indeed a great design for libraries.</p>
+
+<hr />
+
+<p>Did this tutorial encourage you to use abstraction in your next library?</p>
+
+
+      </section>
+      <footer>
+        <p><small>Copyright (c) 2025 Danyal Zia Khan</small></p>
+      </footer>
+    </div>
+    <script src="/assets/js/scale.fix.js"></script>
+  </body>
+</html>
