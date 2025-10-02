@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Generics in C# - Its Usage and How It Differs From C++ Templates and Java Generics | Danyal Zia Khan</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Generics in C# - Its Usage and How It Differs From C++ Templates and Java Generics" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Generics in C# - Its Usage and How It Differs From C++ Templates and Java Generics" />
+<meta property="og:description" content="Generics in C# - Its Usage and How It Differs From C++ Templates and Java Generics" />
+<link rel="canonical" href="http://localhost:4000/blog/archive/2016-09-29-generics-in-csharp/" />
+<meta property="og:url" content="http://localhost:4000/blog/archive/2016-09-29-generics-in-csharp/" />
+<meta property="og:site_name" content="Danyal Zia Khan" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-09-29T00:00:00+05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Generics in C# - Its Usage and How It Differs From C++ Templates and Java Generics" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2016-09-29T00:00:00+05:00","datePublished":"2016-09-29T00:00:00+05:00","description":"Generics in C# - Its Usage and How It Differs From C++ Templates and Java Generics","headline":"Generics in C# - Its Usage and How It Differs From C++ Templates and Java Generics","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/archive/2016-09-29-generics-in-csharp/"},"url":"http://localhost:4000/blog/archive/2016-09-29-generics-in-csharp/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=45d34487792f2956ddb52a5175ed56dd62002dbb">
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1><a href="http://localhost:4000/">Danyal Zia Khan</a></h1>
+
+        
+
+        <p>Software engineer specializing in Python automation, web scraping, API development, and full-stack web applications. I deliver clean, efficient solutions for complex tasks and custom workflows.</p>
+        
+        <nav style="margin-bottom: 20px">
+        
+        <a href="/" style="margin-right: 10px">
+            Home
+        </a>
+        
+        <a href="/blog" style="margin-right: 10px">
+            Blog
+        </a>
+        
+        </nav>
+
+      </header>
+      <section>
+
+      <h1 id="generics-in-c---its-usage-and-how-it-differs-from-c-templates-and-java-generics">Generics in C# - Its Usage and How It Differs From C++ Templates and Java Generics</h1>
+
+<p><strong>Note:</strong> This tutorial assumes that you have read my previous tutorials, especially on operator overloading.</p>
+
+<p><strong>Difficulty:</strong> Intermediate</p>
+
+<p>Generics allow a type or method to operate on objects of various types while providing compile time type safety. They can be used to achieve parametric polymorphism, a way to make a language more expressive while still maintaining full static type safety. Through generics, you can generically define a member or method in a class that is valid for all the related types, or you can pass any data type to a function whose parameter has any template. Templates are commonly considered as a compile time feature…</p>
+
+<p>In this detailed tutorial, I will tell you how you can implement generics, the benefits of this programming model, and the difference between Java and C#. Let’s start the journey!</p>
+
+<hr />
+
+<h2 id="how-to-implement-generics">How To Implement Generics</h2>
+
+<p>In my previous tutorial on operator overloading, I gave you the example of <code class="language-plaintext highlighter-rouge">Vector3f</code>. Let us continue from where we left. Suppose we want a class for holding three point vector values (x, y, and z) that is generic and accepts any data type including integer, float, and double. In order to do that, we would normally need to create different classes for different data types. Fortunately, through the generics feature, we can define only a single class with generic semantics that implements the same methods…</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Vector3</span> <span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">T</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">;</span>
+    <span class="k">public</span> <span class="nf">Vector3</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">,</span> <span class="n">T</span> <span class="n">y</span><span class="p">,</span> <span class="n">T</span> <span class="n">z</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">x</span> <span class="p">=</span> <span class="n">x</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">y</span> <span class="p">=</span> <span class="n">y</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">z</span> <span class="p">=</span> <span class="n">z</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The formula to declare a generic class is as follows:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="k">class</span> <span class="nc">name</span><span class="p">&lt;</span><span class="n">data</span> <span class="n">type</span><span class="p">&gt;&gt;</span> <span class="p">&lt;</span><span class="kt">object</span> <span class="n">name</span><span class="p">&gt;</span> <span class="p">=</span> <span class="k">new</span> <span class="p">&lt;</span><span class="k">class</span> <span class="nc">name</span><span class="p">&lt;</span><span class="n">data</span> <span class="n">type</span><span class="p">&gt;&gt;();</span>
+</code></pre></div></div>
+
+<p>Usage:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Generics</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">Vector3</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">veci</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Vector3</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;(</span><span class="m">20</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">5</span><span class="p">);</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">veci</span><span class="p">.</span><span class="n">x</span><span class="p">);</span> <span class="c1">// prints 20</span>
+
+        <span class="kt">var</span> <span class="n">vecf</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Vector3</span><span class="p">&lt;</span><span class="kt">float</span><span class="p">&gt;(</span><span class="m">15.5f</span><span class="p">,</span> <span class="m">12.3f</span><span class="p">,</span> <span class="m">18.5f</span><span class="p">);</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">vecf</span><span class="p">.</span><span class="n">x</span><span class="p">);</span> <span class="c1">// prints 15.5</span>
+
+        <span class="kt">var</span> <span class="n">vecd</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Vector3</span><span class="p">&lt;</span><span class="kt">double</span><span class="p">&gt;(</span><span class="m">18.50</span><span class="p">,</span> <span class="m">20.1</span><span class="p">,</span> <span class="m">25.3</span><span class="p">);</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">vecd</span><span class="p">.</span><span class="n">x</span><span class="p">);</span> <span class="c1">// prints 18.5</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>As you can see, we can easily create an object of <code class="language-plaintext highlighter-rouge">Vector3</code> of any data type. This greatly reduces the need to create separate classes for different types. The above example is for a generic class. Note, however, that you cannot use operators on a generic data type, because at the time of compilation, a compiler doesn’t know whether those operations make sense. That is a limitation of generics in C#. However, you can nevertheless overload operators in a class if you are sure that a programmer will use on…</p>
+
+<hr />
+
+<h2 id="generic-method">Generic Method</h2>
+
+<p>Consider a simple method for printing what a programmer passed to a method. For printing different data types (int, float, string, etc.), you would normally need to define different methods of the same name (function overloading).</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="k">void</span> <span class="nf">PrintInput</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="k">void</span> <span class="nf">PrintInput</span><span class="p">(</span><span class="kt">float</span> <span class="n">i</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="k">void</span> <span class="nf">PrintInput</span><span class="p">(</span><span class="kt">string</span> <span class="n">i</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>You can see that the implementation is the same for all the methods, but as C# is strongly typed, you cannot pass a double into the parameter for <code class="language-plaintext highlighter-rouge">int</code>, so we had to define different methods. Fortunately, through generics, you only need to define a single method.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">PrintInput</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">T</span> <span class="n">i</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="generic-interface">Generic Interface</h2>
+
+<p>An interface can be generic too. Consider the following example:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">interface</span> <span class="nc">IVector3</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="n">T</span> <span class="nf">GetX</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Vector3f</span><span class="p">:</span> <span class="n">IVector3</span><span class="p">&lt;</span><span class="kt">float</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="nf">GetX</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Vector3i</span><span class="p">:</span> <span class="n">IVector3</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="nf">GetX</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="how-generics-work">How Generics Work</h2>
+
+<p>As I previously mentioned, generics are a compile time feature, meaning they work during compilation of a program. They transform the class, interface, or function that has a generic type into equivalent source code with specific classes, interfaces, or functions of data types that are used when creating an object.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Vector3</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">T</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>During initialization of an object, the compiler transforms the above class into equivalent classes:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Vector3</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Vector3</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Note that in C#, the types are substituted during compilation, so there may be a slight overhead.</p>
+
+<hr />
+
+<h2 id="difference-from-java-generics">Difference From Java Generics</h2>
+
+<p>In Java, there is a concept of generics too, which, although similar in syntax, has a different implementation. Generics in Java provide compile time safety for type correctness but are partially considered a run time feature and are somewhat similar to inheritance polymorphism in practice. In Java, there is a process called type erasure, through which type information is removed during compilation and there is no way to tell what was the type of a generic when it was instantiated during run time. This i…</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">MyClass</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span>
+<span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">MyMethod</span><span class="o">(</span><span class="nc">Object</span> <span class="n">item</span><span class="o">)</span>
+    <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">item</span> <span class="k">instanceof</span> <span class="no">T</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// Compiler error</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Because there is no way to tell during run time what the type of <code class="language-plaintext highlighter-rouge">T</code> was. As I said earlier, Java has type erasure, which actually has run time cost because behind the scenes Java’s compiler casts the type, something like the following:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Vector3</span><span class="o">&gt;</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Vector3</span><span class="o">&gt;();</span>
+<span class="nc">Vector3</span> <span class="n">vec</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Vector3</span><span class="o">)</span><span class="n">foo</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="difference-from-c-templates">Difference From C++ Templates</h2>
+
+<p>In C++, templates are a pure compile time feature, which greatly increases compilation speed. The resulting program is bigger in size as well due to the boilerplate code templates create during compilation. Templates in C++ are more powerful than C# and Java but are also more complex. It gives a terrible compilation speed during source code transformation. Both provide support for parameterized types. C++ provides substitutions of types during compile time. In C#, however, substitutions are performed at …</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">&gt;</span>
+<span class="k">class</span> <span class="nc">Vector3</span>
+<span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">T</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">Vector3</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">;</span> <span class="c1">// define Vector3 of type int during compile time</span>
+    <span class="n">vec</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In C#, you cannot call arithmetic operators on a generic type, though you can call user defined operators. In C++, the following code is valid:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">&gt;</span>
+<span class="k">class</span> <span class="nc">Vector3</span>
+<span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">T</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">;</span>
+    <span class="n">T</span> <span class="n">getLength</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span> <span class="o">*</span> <span class="n">z</span><span class="p">);</span> <span class="c1">// * is valid here</span>
+    <span class="p">}</span>
+    <span class="n">Vector3</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">,</span> <span class="n">T</span> <span class="n">y</span><span class="p">,</span> <span class="n">T</span> <span class="n">z</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">Vector3</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">(</span><span class="mf">15.5</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">13.2</span><span class="p">);</span>
+    <span class="n">vec</span><span class="p">.</span><span class="n">getLength</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>C# neither supports explicit specialization nor partial specialization, which makes generics less useful in some cases.</p>
+
+<hr />
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Generics are one of the most useful features, especially in libraries. Their usefulness cannot be dismissed when creating a library for other programmers, considering the fact that they are implemented in collections in C#. I find it easier to achieve polymorphism through generics than through interfaces. What do you think?</p>
+
+<hr />
+
+<p>References:<br />
+<a href="http://en.wikipedia.org/wiki/Parametric_polymorphism">Wikipedia: Parametric Polymorphism</a><br />
+<a href="http://msdn.microsoft.com/en-us/library/ms379564%28v=vs.80%29.aspx">MSDN: Generics in .NET</a><br />
+<a href="http://en.wikipedia.org/wiki/Generics_in_Java">Wikipedia: Generics in Java</a><br />
+<a href="http://msdn.microsoft.com/en-us/library/c6cyy67b.aspx">MSDN: C# Generics</a><br />
+<a href="http://stackoverflow.com/questions/31693/what-are-the-differences-between-generics-in-c-sharp-and-java-and-templates-i">Stack Overflow: Differences between C# and Java Generics</a><br />
+<a href="http://msdn.microsoft.com/en-us/library/kwtft8ak.aspx">MSDN: Generic Methods</a></p>
+
+
+      </section>
+      <footer>
+        <p><small>Copyright (c) 2025 Danyal Zia Khan</small></p>
+      </footer>
+    </div>
+    <script src="/assets/js/scale.fix.js"></script>
+  </body>
+</html>

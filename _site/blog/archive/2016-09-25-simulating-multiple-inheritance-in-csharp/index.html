@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Simulating Multiple Inheritance in C# | Danyal Zia Khan</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Simulating Multiple Inheritance in C#" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Simulating Multiple Inheritance in C#" />
+<meta property="og:description" content="Simulating Multiple Inheritance in C#" />
+<link rel="canonical" href="http://localhost:4000/blog/archive/2016-09-25-simulating-multiple-inheritance-in-csharp/" />
+<meta property="og:url" content="http://localhost:4000/blog/archive/2016-09-25-simulating-multiple-inheritance-in-csharp/" />
+<meta property="og:site_name" content="Danyal Zia Khan" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-09-25T00:00:00+05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Simulating Multiple Inheritance in C#" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2016-09-25T00:00:00+05:00","datePublished":"2016-09-25T00:00:00+05:00","description":"Simulating Multiple Inheritance in C#","headline":"Simulating Multiple Inheritance in C#","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/archive/2016-09-25-simulating-multiple-inheritance-in-csharp/"},"url":"http://localhost:4000/blog/archive/2016-09-25-simulating-multiple-inheritance-in-csharp/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=45d34487792f2956ddb52a5175ed56dd62002dbb">
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1><a href="http://localhost:4000/">Danyal Zia Khan</a></h1>
+
+        
+
+        <p>Software engineer specializing in Python automation, web scraping, API development, and full-stack web applications. I deliver clean, efficient solutions for complex tasks and custom workflows.</p>
+        
+        <nav style="margin-bottom: 20px">
+        
+        <a href="/" style="margin-right: 10px">
+            Home
+        </a>
+        
+        <a href="/blog" style="margin-right: 10px">
+            Blog
+        </a>
+        
+        </nav>
+
+      </header>
+      <section>
+
+      <h1 id="simulating-multiple-inheritance-in-c">Simulating Multiple Inheritance in C#</h1>
+
+<p><strong>Note:</strong> This tutorial assumes that you have read my previous tutorials and that you understand the following concepts:</p>
+
+<ul>
+  <li>Creating an instance of a class</li>
+  <li>Public, private and protected methods</li>
+  <li>Properties</li>
+  <li>Inheritance</li>
+  <li>Interface</li>
+  <li>Polymorphism</li>
+</ul>
+
+<p><strong>Difficulty:</strong> Intermediate</p>
+
+<p>C# (or Java) does not support multiple inheritance. Classes belong to the single rooted object hierarchy and can inherit from only one parent class. Interfaces, however, can be inherited multiple times by a class. The cited issue against supporting multiple inheritance is that it is quite hard to implement its design in practice, and in some cases it manifests as an anti design pattern and seems to cause the diamond problem (sometimes referred to as the deadly diamond of death). It mostly comes down to t…</p>
+
+<p>I will first show you how multiple inheritance can cause ambiguity and then I will show you places where it can be used to reduce program complexity. Finally I will show you the possible ways (with pros and cons) to simulate it in C#. Let’s get started!</p>
+
+<hr />
+
+<h2 id="why-c-does-not-support-multiple-inheritance">Why C# Does Not Support Multiple Inheritance</h2>
+
+<p>Recall that multiple inheritance causes the diamond problem. It is actually an ambiguity that arises when two classes (let’s call them B and C) inherit from another class (let’s call it A) and a third class (let’s call it D) inherits from both B and C. If class A has a method that B or C override, but D does not override it, then it is unclear which version of the method D should inherit.</p>
+
+<p>Suppose you have a class <code class="language-plaintext highlighter-rouge">Box</code> that has the attributes of both <code class="language-plaintext highlighter-rouge">Node</code> and <code class="language-plaintext highlighter-rouge">Transformable</code>. Both <code class="language-plaintext highlighter-rouge">Node</code> and <code class="language-plaintext highlighter-rouge">Transformable</code> define a method <code class="language-plaintext highlighter-rouge">SetPosition</code>, and both are inherited in <code class="language-plaintext highlighter-rouge">Drawable</code>. Now <code class="language-plaintext highlighter-rouge">Drawable</code> also implements <code class="language-plaintext highlighter-rouge">SetPosition</code> and is inherited by <code class="language-plaintext highlighter-rouge">Box</code>. When implementing <code class="language-plaintext highlighter-rouge">SetPosition</code>, there is an ambiguity about which version the object should call.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Node</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetTexture</span><span class="p">(</span><span class="kt">string</span> <span class="n">texture</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetPosition</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Transformable</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetPosition</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Drawable</span> <span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">Transformable</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetPosition</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Box</span> <span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">Transformable</span><span class="p">,</span> <span class="n">Drawable</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetTexture</span><span class="p">(</span><span class="kt">string</span> <span class="n">texture</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetPosition</span><span class="p">()</span> <span class="c1">// which class’s method does it implement?</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In C++ the compiler would simply give an ambiguity error, and you would need to use virtual methods to solve the problem. In C#, the issue is solved by supporting multiple inheritance only for interfaces. Inheriting multiple interfaces does not cause the diamond problem because there can be only one implementation of a method. Thus the complexity of multiple inheritance is avoided.</p>
+
+<hr />
+
+<h2 id="how-to-simulate-multiple-inheritance-in-c">How To Simulate Multiple Inheritance in C#</h2>
+
+<p>There are several ways to simulate multiple inheritance in C#:</p>
+
+<h3 id="using-interfaces">Using Interfaces</h3>
+
+<p>Even though C# does not support inheriting from more than one parent class, it supports inheriting from multiple interfaces. Through interfaces, you can simulate multiple inheritance.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">interface</span> <span class="nc">Node</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetTexture</span><span class="p">(</span><span class="kt">string</span> <span class="n">texture</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">interface</span> <span class="nc">Transformable</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetPosition</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">interface</span> <span class="nc">Drawable</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetPosition</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Box</span> <span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">Transformable</span><span class="p">,</span> <span class="n">Drawable</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetTexture</span><span class="p">(</span><span class="kt">string</span> <span class="n">texture</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetPosition</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Here you must implement the methods of <code class="language-plaintext highlighter-rouge">Node</code>, <code class="language-plaintext highlighter-rouge">Transformable</code>, and <code class="language-plaintext highlighter-rouge">Drawable</code> in every class, which can cause code duplication. To solve this issue, you can create an abstract class that implements the methods and then inherit that in your class.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">abstract</span> <span class="k">class</span> <span class="nc">ImplNodeTransfDrawable</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetTexture</span><span class="p">(</span><span class="kt">string</span> <span class="n">texture</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetPosition</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Box</span> <span class="p">:</span> <span class="n">ImplNodeTransfDrawable</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Pros:</strong></p>
+
+<ul>
+  <li>Easy to implement</li>
+  <li>Recommended because multiple interfaces cannot cause the diamond problem</li>
+</ul>
+
+<p><strong>Cons:</strong></p>
+
+<ul>
+  <li>Can lead to code duplication</li>
+</ul>
+
+<hr />
+
+<h3 id="object-has-another-object-composition">Object Has Another Object (Composition)</h3>
+
+<p>Sometimes it is better to think in terms of “has” rather than “is”. For example, a horse <em>is</em> an animal but <em>has</em> legs. By using composition, you can embed objects instead of inheriting them.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Box</span>
+<span class="p">{</span>
+    <span class="n">Node</span> <span class="n">node</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Node</span><span class="p">();</span>
+    <span class="n">Transformable</span> <span class="n">transf</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Transformable</span><span class="p">();</span>
+    <span class="n">Drawable</span> <span class="n">drawable</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Drawable</span><span class="p">();</span>
+
+    <span class="k">public</span> <span class="nf">Box</span><span class="p">(</span><span class="n">Node</span> <span class="n">node</span><span class="p">,</span> <span class="n">Transformable</span> <span class="n">transf</span><span class="p">,</span> <span class="n">Drawable</span> <span class="n">drawable</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">node</span> <span class="p">=</span> <span class="n">node</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">transf</span> <span class="p">=</span> <span class="n">transf</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">drawable</span> <span class="p">=</span> <span class="n">drawable</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetTexture</span><span class="p">(</span><span class="kt">string</span> <span class="n">texture</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">node</span><span class="p">.</span><span class="nf">SetTexture</span><span class="p">(</span><span class="n">texture</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetPosition</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">transf</span><span class="p">.</span><span class="nf">SetPosition</span><span class="p">();</span> <span class="c1">// avoids diamond problem</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Pros:</strong></p>
+
+<ul>
+  <li>Easy to implement</li>
+  <li>No duplication of code</li>
+</ul>
+
+<p><strong>Cons:</strong></p>
+
+<ul>
+  <li>Does not truly represent multiple inheritance</li>
+  <li>May be confusing to readers of your code</li>
+</ul>
+
+<hr />
+
+<h3 id="using-composition-with-interfaces">Using Composition with Interfaces</h3>
+
+<p>This is a modified version of the composition approach. You can create interfaces and compositions to hold objects of the classes you want to simulate inheritance from.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">interface</span> <span class="nc">INode</span>
+<span class="p">{</span>
+    <span class="n">Node</span> <span class="nf">GetNode</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">interface</span> <span class="nc">ITransformable</span>
+<span class="p">{</span>
+    <span class="n">Transformable</span> <span class="nf">GetTransformable</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">interface</span> <span class="nc">IDrawable</span>
+<span class="p">{</span>
+    <span class="n">Drawable</span> <span class="nf">GetDrawable</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Box</span> <span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">Transformable</span>
+<span class="p">{</span>
+    <span class="n">Node</span> <span class="n">node</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Node</span><span class="p">();</span>
+    <span class="k">public</span> <span class="n">Node</span> <span class="nf">GetNode</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">node</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="n">Transformable</span> <span class="n">transf</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Transformable</span><span class="p">();</span>
+    <span class="k">public</span> <span class="n">Transformable</span> <span class="nf">GetTransformable</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">transf</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="n">Drawable</span> <span class="n">drawable</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Drawable</span><span class="p">();</span>
+    <span class="k">public</span> <span class="n">Drawable</span> <span class="nf">GetDrawable</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">drawable</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Pros:</strong></p>
+
+<ul>
+  <li>Similar semantics to multiple inheritance</li>
+  <li>Allows reuse of code</li>
+  <li>Supports polymorphism</li>
+</ul>
+
+<p><strong>Cons:</strong></p>
+
+<ul>
+  <li>Can generate boilerplate code</li>
+  <li>Harder to manage in large programs</li>
+</ul>
+
+<hr />
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Simulating multiple inheritance in C# is possible through interfaces and composition. Each approach has its pros and cons, and the choice depends on your program design. While C# avoids the complexity of true multiple inheritance, you can still achieve similar functionality through these techniques.</p>
+
+<hr />
+
+<p>References:<br />
+<a href="http://en.wikipedia.org/wiki/Multiple_inheritance">Wikipedia: Multiple Inheritance</a><br />
+<a href="http://stackoverflow.com/questions/18438196/c-sharp-multiple-inheritance">Stack Overflow: Multiple Inheritance in C#</a><br />
+<a href="http://en.wikipedia.org/wiki/Is-a">Wikipedia: Is a</a><br />
+<a href="http://en.wikipedia.org/wiki/Has-a">Wikipedia: Has a</a></p>
+
+
+      </section>
+      <footer>
+        <p><small>Copyright (c) 2025 Danyal Zia Khan</small></p>
+      </footer>
+    </div>
+    <script src="/assets/js/scale.fix.js"></script>
+  </body>
+</html>
