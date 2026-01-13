@@ -7,12 +7,12 @@ title: Home
 
 I'm a software engineer who builds **Python automation, RPA solutions, AI powered tools, 3D processing pipelines, web scrapers, and full stack systems** that save time and cut manual effort. I also create **tutorials and technical writing** that simplify complex topics for others.
 
-I personally craft the code for each project and tailor it to the client's exact needs. Recently, my work has focused on **applied AI and 3D automation**, including production-grade Blender addons used in a **digital twin (3D visualization) pipeline** at a company partly owned by **Hexagon**. I build systems that connect **AI models, 3D geometry processing, and automation scripts** into real workflows that people actually use in production. The goal is always the same: remove manual work, speed things up, and make complex pipelines easier for teams to run.
+I personally craft the code for each project and tailor it to the client's exact needs. Recently, my work has focused on applied AI and 3D automation, including production grade Blender addons used in a digital twin (3D visualization) pipeline at a company partly owned by Hexagon. I build systems that connect AI models, 3D geometry processing, and automation scripts into real workflows that people actually use in production. The goal is always the same: remove manual work, speed things up, and make complex pipelines easier for teams to run.
 
 ## What I Do
 
-- **AI-to-Blender Digital Twin Pipeline**  
-  Built a production pipeline for a **3D visualization (digital twin) company partly owned by Hexagon** where **Trellis AI generated 3D models** are created from reference images and then passed into my custom **Blender addons and scripts**. These tools clean up messy geometry, remove extra triangles, run voxel remeshing and QuadriFlow remeshing, and turn triangle heavy meshes into clean quad based models that artists can easily edit, texture, and use in the final digital twin scenes while keeping the original shape and detail. This pipeline saves hours of manual cleanup on every model and makes AI generated 3D assets practical for real production.
+- **Digital Twin 3D Mesh Cleanup and Quad Conversion** 
+  Built a production pipeline for a 3D visualization (digital twin) company partly owned by Hexagon where Trellis AI generated 3D models are created from reference images and then passed into my custom Blender addons and scripts. These tools clean up messy geometry, remove extra triangles, run voxel remeshing and QuadriFlow remeshing, and turn triangle heavy meshes into clean quad based models that artists can easily edit, texture, and use in the final digital twin scenes while keeping the original shape and detail. This pipeline saves hours of manual cleanup on every model and makes AI generated 3D assets practical for real production.
 
 - **AI Powered Automation & Agentic Tools**  
   I design and implement practical AI systems using modern open weight models such as Qwen3 VL, Qwen Image Edit, Qwen3 Coder, and related tooling. This includes image understanding, decision making pipelines, Excel driven AI workflows, and agent style programs that combine reasoning, OCR, and visual analysis to replace slow manual processes.
@@ -34,10 +34,8 @@ I personally craft the code for each project and tailor it to the client's exact
 
 ## Recent Projects
 
-- **AI-to-Blender Digital Twin Pipeline**
-  Developed a production pipeline for a **3D visualization (digital twin) company partially owned by Hexagon**. The workflow starts with **Trellis AI-generated 3D prototypes** created from reference images, which are then passed into my custom **Blender addons and scripts**.  
-  These tools automatically **clean up messy geometry, remove excess triangles, perform voxel remeshing and QuadriFlow remeshing, and convert triangle-heavy meshes into clean quad-based topology**. The result is a **modeler-ready asset** that preserves the original shape and detail while being far easier and faster for artists to edit, texture, and integrate into the final digital twin scene.  
-  This pipeline removes hours of manual cleanup from each model and makes AI-generated 3D assets practical for real production.
+- **AI Driven Tris to Quads Blender Addon**
+  Developed a production pipeline for a 3D visualization (digital twin) company partially owned by Hexagon. The workflow starts with Trellis AI-generated 3D prototypes created from reference images, which are then passed into my custom Blender addons and scripts. These tools automatically clean up messy geometry, remove excess triangles, perform voxel remeshing and QuadriFlow remeshing, and convert triangle-heavy meshes into clean quad-based topology. The result is a modeler-ready asset that preserves the original shape and detail while being far easier and faster for artists to edit, texture, and integrate into the final digital twin scene. This pipeline removes hours of manual cleanup from each model and makes AI-generated 3D assets practical for real production.
 
 - **Product Similarity Search (AI Vision Based)**
   Built an AI driven product matching system using open weight vision language models. Initially experimented with CLIP based cosine similarity combined with OCR, but abandoned the approach due to accuracy and performance limitations. Switched to general purpose multimodal models such as Qwen2.5, Intern2V, and finally Qwen3 VL. The final system sends base product images and seller images directly to the Qwen3 VL 8B model via a llama.cpp server with an OpenAI compatible API, prompting the model to answer only yes or no if the products are the same. The model internally performs OCR and deep visual reasoning, recognizing attributes such as object type, materials, colors, and structure. The program reads an Excel file containing product images, processes each row through the model, and writes the final matching results back to a new Excel file automatically.
@@ -57,7 +55,7 @@ I personally craft the code for each project and tailor it to the client's exact
 - **ThrowViz (Throw Distance Visualization)**
   While working on the 3D Sand Model, I built a little Python tool to figure out how much area a laser projector would cover at different distances. You just give it the surface size, the distance from the projector to the surface, and the projector's throw ratio, and it shows you the projected coverage. It's handy for quickly testing the best mounting height or distance. For example, if you need a bigger projection area, it tells you how much farther back the projector should be.
 
-- **Laravel upgrade (v6 → v12)**
+- **Laravel Upgrade from Version 6 to 12**
   Upgraded a production Laravel application from version 6 to 12, modernizing all dependencies and modules. Migrated the frontend build system from Laravel Mix to Vite and ported the Vue 2 codebase to Vue 3 for improved performance and maintainability.
 
 - **Pakistan Businessmen Association (PBA)**  
