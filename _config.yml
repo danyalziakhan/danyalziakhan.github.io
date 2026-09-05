@@ -1,0 +1,54 @@
+title: Danyal Zia Khan
+email: danyalziakhan@gmail.com
+description: >-
+  Python developer specializing in automation pipelines, AI assisted systems,
+  metric 3D reconstruction, and web scraping.
+tagline: Python developer, automation and 3D pipelines
+url: "https://danyalziakhan.com"
+image: /assets/images/social-card.png
+author: Danyal Zia Khan
+lang: en-US
+social:
+  github: https://github.com/danyalziakhan
+  linkedin: https://linkedin.com/in/danyalziakhan
+  fiverr: https://www.fiverr.com/danyalzia
+
+navigation:
+  - title: Home
+    url: /
+  - title: About
+    url: /about/
+  - title: Work
+    url: /work/
+  - title: Services
+    url: /services/
+  - title: Contact
+    url: /contact/
+
+collections:
+  projects:
+    output: true
+    permalink: /work/:name/
+  archive:
+    output: false
+
+defaults:
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+  - scope:
+      path: ""
+    values:
+      layout: default
+      image: /assets/images/social-card.png
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - notes.txt

@@ -1,0 +1,5 @@
+notes.txt
+_site/
+.jekyll-cache/
+.bundle/
+vendor/

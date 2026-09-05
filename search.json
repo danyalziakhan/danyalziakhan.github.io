@@ -1,0 +1,10 @@
+---
+layout: null
+permalink: /search.json
+sitemap: false
+---
+{%- assign navurls = "" | split: "" -%}
+{%- for l in site.navigation %}{% assign navurls = navurls | push: l.url %}{% endfor -%}
+{%- assign realpages = site.pages | where_exp: "p", "navurls contains p.url" -%}
+{%- assign all = realpages | concat: site.projects -%}
+[{% assign first = true %}{% for d in all %}{% unless first %},{% endunless %}{% assign first = false %}{"title":{{ d.title | default: site.title | strip | jsonify }},"url":{{ d.url | relative_url | jsonify }},"summary":{{ d.summary | default: "" | strip_html | normalize_whitespace | jsonify }},"text":{{ d.content | strip_html | normalize_whitespace | strip | truncate: 2500 | jsonify }}}{% endfor %}]
